@@ -59,35 +59,38 @@ const Home = () => {
     })
 
 
-    const handlePickupChange = async (e) => {
-        setPickup(e.target.value)
-        try {
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
-                params: { input: e.target.value },
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
+    const suggestionTimer = useRef(null)
 
-            })
-            setPickupSuggestions(response.data)
-        } catch {
-            // handle error
+    // Debounced so we don't fire a request on every keystroke (the free geocoder rate-limits)
+    const fetchSuggestions = (input, setSuggestions) => {
+        clearTimeout(suggestionTimer.current)
+        if (input.length < 3) {
+            setSuggestions([])
+            return
         }
+        suggestionTimer.current = setTimeout(async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+                    params: { input },
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                setSuggestions(response.data)
+            } catch {
+                // handle error
+            }
+        }, 600)
     }
 
-    const handleDestinationChange = async (e) => {
+    const handlePickupChange = (e) => {
+        setPickup(e.target.value)
+        fetchSuggestions(e.target.value, setPickupSuggestions)
+    }
+
+    const handleDestinationChange = (e) => {
         setDestination(e.target.value)
-        try {
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
-                params: { input: e.target.value },
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            })
-            setDestinationSuggestions(response.data)
-        } catch {
-            // handle error
-        }
+        fetchSuggestions(e.target.value, setDestinationSuggestions)
     }
 
     const submitHandler = (e) => {

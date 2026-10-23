@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from 'react'
-import { LoadScript, GoogleMap, Marker } from '@react-google-maps/api'
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import markerIcon from 'leaflet/dist/images/marker-icon.png'
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
+import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 
-const containerStyle = {
-    width: '100%',
-    height: '100%',
-};
+L.Icon.Default.mergeOptions({
+    iconUrl: markerIcon,
+    iconRetinaUrl: markerIcon2x,
+    shadowUrl: markerShadow
+});
 
 const center = {
     lat: -3.745,
     lng: -38.523
 };
 
+const Recenter = ({ position }) => {
+    const map = useMap();
+
+    useEffect(() => {
+        map.setView([ position.lat, position.lng ]);
+    }, [ position.lat, position.lng, map ]);
+
+    return null;
+}
+
 const LiveTracking = () => {
     const [ currentPosition, setCurrentPosition ] = useState(center);
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            const { latitude, longitude } = position.coords;
-            setCurrentPosition({
-                lat: latitude,
-                lng: longitude
-            });
-        });
-
         const watchId = navigator.geolocation.watchPosition((position) => {
             const { latitude, longitude } = position.coords;
             setCurrentPosition({
@@ -34,35 +42,19 @@ const LiveTracking = () => {
         return () => navigator.geolocation.clearWatch(watchId);
     }, []);
 
-    useEffect(() => {
-        const updatePosition = () => {
-            navigator.geolocation.getCurrentPosition((position) => {
-                const { latitude, longitude } = position.coords;
-
-                console.log('Position updated:', latitude, longitude);
-                setCurrentPosition({
-                    lat: latitude,
-                    lng: longitude
-                });
-            });
-        };
-
-        updatePosition(); // Initial position update
-
-        const intervalId = setInterval(updatePosition, 1000); // Update every 10 seconds
-
-    }, []);
-
     return (
-        <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-            <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={currentPosition}
-                zoom={15}
-            >
-                <Marker position={currentPosition} />
-            </GoogleMap>
-        </LoadScript>
+        <MapContainer
+            center={[ currentPosition.lat, currentPosition.lng ]}
+            zoom={15}
+            style={{ width: '100%', height: '100%', position: 'relative', zIndex: 0 }}
+        >
+            <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[ currentPosition.lat, currentPosition.lng ]} />
+            <Recenter position={currentPosition} />
+        </MapContainer>
     )
 }
 
