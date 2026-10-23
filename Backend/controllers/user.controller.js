@@ -59,7 +59,7 @@ module.exports.loginUser = async (req, res, next) => {
 
     res.cookie('token', token);
 
-    res.status(200).json({ token, user });
+    res.status(200).json({ message: 'User logged in successfully', token, user });
 }
 
 module.exports.getUserProfile = async (req, res, next) => {
@@ -74,6 +74,6 @@ module.exports.logoutUser = async (req, res, next) => {
 
     await blackListTokenModel.create({ token });
 
-    res.status(200).json({ message: 'Logged out' });
+    res.status(200).json({ message: 'User logged out successfully' });
 
 }
