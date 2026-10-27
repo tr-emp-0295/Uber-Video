@@ -1,4 +1,5 @@
 import React from 'react'
+import VehicleIcon from './VehicleIcon'
 
 const ConfirmRide = (props) => {
     return (
@@ -9,7 +10,7 @@ const ConfirmRide = (props) => {
             <h3 className='text-2xl font-semibold mb-5'>Confirm your Ride</h3>
 
             <div className='flex gap-2 justify-between flex-col items-center'>
-                <img className='h-20' src="https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg" alt="" />
+                <VehicleIcon type={props.vehicleType} className='h-20 w-20 text-2xl' />
                 <div className='w-full mt-5'>
                     <div className='flex items-center gap-5 p-3 border-b-2'>
                         <i className="ri-map-pin-user-fill"></i>
@@ -38,7 +39,7 @@ const ConfirmRide = (props) => {
                     props.setConfirmRidePanel(false)
                     props.createRide()
 
-                }} className='w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg'>Confirm</button>
+                }} className='w-full mt-5 bg-brand text-ink font-bold shadow p-2 rounded-xl'>Confirm</button>
             </div>
         </div>
     )

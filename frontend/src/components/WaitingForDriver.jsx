@@ -1,4 +1,5 @@
 import React from 'react'
+import VehicleIcon from './VehicleIcon'
 
 const WaitingForDriver = (props) => {
   return (
@@ -8,7 +9,7 @@ const WaitingForDriver = (props) => {
       }}><i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i></h5>
 
       <div className='flex items-center justify-between'>
-        <img className='h-12' src="https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg" alt="" />
+        <VehicleIcon type={props.ride?.vehicleType} className='h-12 w-12 text-2xl' />
         <div className='text-right'>
           <h2 className='text-lg font-medium capitalize'>{props.ride?.captain.fullname.firstname}</h2>
           <h4 className='text-xl font-semibold -mt-1 -mb-1'>{props.ride?.captain.vehicle.plate}</h4>

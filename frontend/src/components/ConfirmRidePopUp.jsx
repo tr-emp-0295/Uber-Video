@@ -34,9 +34,9 @@ const ConfirmRidePopUp = (props) => {
                 props.setRidePopupPanel(false)
             }}><i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i></h5>
             <h3 className='text-2xl font-semibold mb-5'>Confirm this ride to Start</h3>
-            <div className='flex items-center justify-between p-3 border-2 border-yellow-400 rounded-lg mt-4'>
+            <div className='flex items-center justify-between p-3 border-2 border-brand rounded-xl mt-4'>
                 <div className='flex items-center gap-3 '>
-                    <img className='h-12 rounded-full object-cover w-12' src="https://i.pinimg.com/236x/af/26/28/af26280b0ca305be47df0b799ed1b12b.jpg" alt="" />
+                    <span className='h-12 w-12 rounded-full bg-brand flex items-center justify-center'><i className="ri-user-3-fill"></i></span>
                     <h2 className='text-lg font-medium capitalize'>{props.ride?.user.fullname.firstname}</h2>
                 </div>
                 <h5 className='text-lg font-semibold'>2.2 KM</h5>
@@ -68,14 +68,14 @@ const ConfirmRidePopUp = (props) => {
 
                 <div className='mt-6 w-full'>
                     <form onSubmit={submitHander}>
-                        <input value={otp} onChange={(e) => setOtp(e.target.value)} type="text" className='bg-[#eee] px-6 py-4 font-mono text-lg rounded-lg w-full mt-3' placeholder='Enter OTP' />
+                        <input value={otp} onChange={(e) => setOtp(e.target.value)} type="text" className='bg-[#eee] px-6 py-4 font-mono text-lg rounded-xl w-full mt-3' placeholder='Enter OTP' />
 
-                        <button className='w-full mt-5 text-lg flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg'>Confirm</button>
+                        <button className='w-full mt-5 text-lg flex justify-center bg-brand text-ink font-bold shadow p-3 rounded-xl'>Confirm</button>
                         <button onClick={() => {
                             props.setConfirmRidePopupPanel(false)
                             props.setRidePopupPanel(false)
 
-                        }} className='w-full mt-2 bg-red-600 text-lg text-white font-semibold p-3 rounded-lg'>Cancel</button>
+                        }} className='w-full mt-2 bg-red-600 text-lg text-white font-semibold p-3 rounded-xl'>Cancel</button>
 
                     </form>
                 </div>

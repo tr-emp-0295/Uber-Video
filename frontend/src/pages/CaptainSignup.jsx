@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Logo from '../components/Logo'
 import { Link } from 'react-router-dom'
 import { CaptainDataContext } from '../context/CapatainContext'
 import { useNavigate } from 'react-router-dom'
@@ -59,9 +60,12 @@ const CaptainSignup = () => {
 
   }
   return (
-    <div className='py-5 px-5 h-screen flex flex-col justify-between'>
+    <div className='auth-page py-5 px-5 h-screen flex flex-col justify-between'>
       <div>
-        <img className='w-20 mb-3' src="https://www.svgrepo.com/show/505031/uber-driver.svg" alt="" />
+        <Logo className='mb-6' />
+        <span className='inline-block bg-brand text-ink text-xs font-bold px-3 py-1 rounded-full mb-3'>CAPTAIN</span>
+        <h1 className='text-3xl font-extrabold leading-tight'>Drive &amp; earn</h1>
+        <p className='text-gray-500 mb-8 mt-1'>Join as a captain in a few steps.</p>
 
         <form onSubmit={(e) => {
           submitHandler(e)
@@ -71,7 +75,7 @@ const CaptainSignup = () => {
           <div className='flex gap-4 mb-7'>
             <input
               required
-              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border  text-lg placeholder:text-base'
+              className='bg-[#f3f3f3] w-1/2 rounded-xl px-4 py-3 border border-transparent  text-lg placeholder:text-base'
               type="text"
               placeholder='First name'
               value={firstName}
@@ -81,7 +85,7 @@ const CaptainSignup = () => {
             />
             <input
               required
-              className='bg-[#eeeeee] w-1/2  rounded-lg px-4 py-2 border  text-lg placeholder:text-base'
+              className='bg-[#f3f3f3] w-1/2  rounded-xl px-4 py-3 border border-transparent  text-lg placeholder:text-base'
               type="text"
               placeholder='Last name'
               value={lastName}
@@ -91,22 +95,22 @@ const CaptainSignup = () => {
             />
           </div>
 
-          <h3 className='text-lg font-medium mb-2'>What's our Captain's email</h3>
+          <h3 className='text-sm font-semibold text-gray-700 mb-2'>What's our Captain's email</h3>
           <input
             required
             value={email}
             onChange={(e) => {
               setEmail(e.target.value)
             }}
-            className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
+            className='bg-[#f3f3f3] mb-7 rounded-xl px-4 py-3 border border-transparent w-full text-lg placeholder:text-base'
             type="email"
             placeholder='email@example.com'
           />
 
-          <h3 className='text-lg font-medium mb-2'>Enter Password</h3>
+          <h3 className='text-sm font-semibold text-gray-700 mb-2'>Enter Password</h3>
 
           <input
-            className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
+            className='bg-[#f3f3f3] mb-7 rounded-xl px-4 py-3 border border-transparent w-full text-lg placeholder:text-base'
             value={password}
             onChange={(e) => {
               setPassword(e.target.value)
@@ -115,11 +119,11 @@ const CaptainSignup = () => {
             placeholder='password'
           />
 
-          <h3 className='text-lg font-medium mb-2'>Vehicle Information</h3>
+          <h3 className='text-sm font-semibold text-gray-700 mb-2'>Vehicle Information</h3>
           <div className='flex gap-4 mb-7'>
             <input
               required
-              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              className='bg-[#f3f3f3] w-1/2 rounded-xl px-4 py-3 border border-transparent text-lg placeholder:text-base'
               type="text"
               placeholder='Vehicle Color'
               value={vehicleColor}
@@ -129,7 +133,7 @@ const CaptainSignup = () => {
             />
             <input
               required
-              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              className='bg-[#f3f3f3] w-1/2 rounded-xl px-4 py-3 border border-transparent text-lg placeholder:text-base'
               type="text"
               placeholder='Vehicle Plate'
               value={vehiclePlate}
@@ -141,7 +145,7 @@ const CaptainSignup = () => {
           <div className='flex gap-4 mb-7'>
             <input
               required
-              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              className='bg-[#f3f3f3] w-1/2 rounded-xl px-4 py-3 border border-transparent text-lg placeholder:text-base'
               type="number"
               placeholder='Vehicle Capacity'
               value={vehicleCapacity}
@@ -151,7 +155,7 @@ const CaptainSignup = () => {
             />
             <select
               required
-              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              className='bg-[#f3f3f3] w-1/2 rounded-xl px-4 py-3 border border-transparent text-lg placeholder:text-base'
               value={vehicleType}
               onChange={(e) => {
                 setVehicleType(e.target.value)
@@ -165,11 +169,11 @@ const CaptainSignup = () => {
           </div>
 
           <button
-            className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'
+            className='bg-brand text-ink font-bold mb-3 rounded-xl px-4 py-3 shadow active:scale-[0.98] transition w-full text-lg placeholder:text-base'
           >Create Captain Account</button>
 
         </form>
-        <p className='text-center'>Already have a account? <Link to='/captain-login' className='text-blue-600'>Login here</Link></p>
+        <p className='text-center'>Already have a account? <Link to='/captain-login' className='text-ink font-semibold underline decoration-brand decoration-2'>Login here</Link></p>
       </div>
       <div>
         <p className='text-[10px] mt-6 leading-tight'>This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy

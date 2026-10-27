@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import Logo from '../components/Logo'
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import axios from 'axios';
@@ -202,23 +203,24 @@ const Home = () => {
 
     return (
         <div className='h-screen relative overflow-hidden'>
-            <img className='w-16 absolute left-5 top-5' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
-            <div className='h-screen w-screen'>
+            <Logo className='absolute left-5 top-5 z-10' />
+            <div className='h-screen w-full lg:pl-[26rem]'>
                 {/* image for temporary use  */}
                 <LiveTracking />
             </div>
-            <div className=' flex flex-col justify-end h-screen absolute top-0 w-full'>
-                <div className='h-[30%] p-6 bg-white relative'>
+            <div className=' flex flex-col justify-end h-screen absolute top-0 w-full lg:w-[26rem] lg:justify-start lg:bg-white lg:shadow-2xl'>
+                <div className='h-[30%] min-h-[310px] p-6 bg-white relative rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.12)] lg:h-auto lg:min-h-0 lg:pt-24 lg:rounded-none lg:shadow-none'>
                     <h5 ref={panelCloseRef} onClick={() => {
                         setPanelOpen(false)
                     }} className='absolute opacity-0 right-6 top-6 text-2xl'>
                         <i className="ri-arrow-down-wide-line"></i>
                     </h5>
-                    <h4 className='text-2xl font-semibold'>Find a trip</h4>
+                    <h4 className='text-2xl font-extrabold'>Where to?</h4>
                     <form className='relative py-3' onSubmit={(e) => {
                         submitHandler(e)
                     }}>
-                        <div className="line absolute h-16 w-1 top-[50%] -translate-y-1/2 left-5 bg-gray-700 rounded-full"></div>
+<div className='relative '>
+<i className='ri-record-circle-fill text-green-600 absolute left-4 top-1/2 -translate-y-1/2 text-lg'></i>
                         <input
                             onClick={() => {
                                 setPanelOpen(true)
@@ -226,10 +228,13 @@ const Home = () => {
                             }}
                             value={pickup}
                             onChange={handlePickupChange}
-                            className='bg-[#eee] px-12 py-2 text-lg rounded-lg w-full'
+                            className='bg-[#f3f3f3] px-12 py-3 text-base rounded-xl border border-transparent w-full'
                             type="text"
                             placeholder='Add a pick-up location'
                         />
+</div>
+<div className='relative mt-3'>
+<i className='ri-map-pin-2-fill text-red-500 absolute left-4 top-1/2 -translate-y-1/2 text-lg'></i>
                         <input
                             onClick={() => {
                                 setPanelOpen(true)
@@ -237,13 +242,14 @@ const Home = () => {
                             }}
                             value={destination}
                             onChange={handleDestinationChange}
-                            className='bg-[#eee] px-12 py-2 text-lg rounded-lg w-full  mt-3'
+                            className='bg-[#f3f3f3] px-12 py-3 text-base rounded-xl border border-transparent w-full '
                             type="text"
                             placeholder='Enter your destination' />
+</div>
                     </form>
                     <button
                         onClick={findTrip}
-                        className='bg-black text-white px-4 py-2 rounded-lg mt-3 w-full'>
+                        className='bg-brand text-ink font-bold px-4 py-3 rounded-xl mt-3 w-full shadow active:scale-[0.98] transition'>
                         Find Trip
                     </button>
                 </div>

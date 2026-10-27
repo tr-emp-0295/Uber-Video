@@ -18,7 +18,7 @@ import 'remixicon/fonts/remixicon.css'
 const App = () => {
 
   return (
-    <div>
+    <div className='app-shell'>
       <Routes>
         <Route path='/' element={<Start />} />
         <Route path='/login' element={<UserLogin />} />

@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react'
+import LiveTracking from '../components/LiveTracking'
+import Logo from '../components/Logo'
 import { Link } from 'react-router-dom'
 import CaptainDetails from '../components/CaptainDetails'
 import RidePopUp from '../components/RidePopUp'
@@ -38,6 +40,8 @@ const CaptainHome = () => {
                             lng: position.coords.longitude
                         }
                     })
+                }, (error) => {
+                    console.error('Captain location unavailable:', error.message)
                 })
             }
         }
@@ -100,18 +104,18 @@ const CaptainHome = () => {
     }, [ confirmRidePopupPanel ])
 
     return (
-        <div className='h-screen'>
-            <div className='fixed p-6 top-0 flex items-center justify-between w-screen'>
-                <img className='w-16' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
+        <div className='h-screen lg:flex'>
+            <div className='fixed p-6 top-0 flex items-center justify-between w-full'>
+                <Logo className='' />
                 <Link to='/captain-home' className=' h-10 w-10 bg-white flex items-center justify-center rounded-full'>
                     <i className="text-lg font-medium ri-logout-box-r-line"></i>
                 </Link>
             </div>
-            <div className='h-3/5'>
-                <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" />
+            <div className='h-3/5 lg:h-full lg:flex-1'>
+                <LiveTracking />
 
             </div>
-            <div className='h-2/5 p-6'>
+            <div className='h-2/5 p-6 lg:h-full lg:w-[28rem] lg:p-8 lg:pt-24 lg:overflow-y-auto'>
                 <CaptainDetails />
             </div>
             <div ref={ridePopupPanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12'>

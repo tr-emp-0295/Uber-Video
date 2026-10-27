@@ -1,3 +1,124 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body {
+  margin: 0;
+  background: #1a1a1a;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Phones get the full screen; larger screens get a centered, phone-sized app.
+   The transform makes `position: fixed` panels size themselves to the app column, not the window. */
+.app-shell {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  height: 100dvh;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #fff;
+  transform: translateZ(0);
+}
+
+@media (min-width: 480px) {
+  .app-shell {
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (min-width: 640px) and (min-height: 760px) {
+  body { padding: 1rem 0; }
+  .app-shell {
+    height: calc(100dvh - 2rem);
+    border-radius: 2rem;
+  }
+}
+
+.h-screen { height: 100dvh; }
+.app-shell .h-screen { height: 100%; }
+.w-screen { width: 100%; }
+
+.app-shell input:focus {
+  outline: none;
+  border-color: #111;
+  box-shadow: 0 0 0 3px rgba(255, 210, 31, 0.6);
+}
+
+/* Large screens: use the whole window instead of a phone-sized column. */
+@media (min-width: 1024px) {
+  body {
+    padding: 0;
+    background: #FFD21F;
+  }
+
+  .app-shell {
+    max-width: none;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  /* Bottom sheets become a side panel on the left. */
+  .app-shell .fixed.bottom-0 {
+    left: 0;
+    right: auto;
+    width: 26rem;
+    border-radius: 0;
+    border-right: 1px solid #e5e5e5;
+  }
+
+  .app-shell .fixed.bottom-0.h-screen {
+    border-radius: 0;
+  }
+
+  /* Login / signup become a centered card. */
+  .auth-page {
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
+    max-height: calc(100dvh - 4rem);
+    min-height: 34rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  }
+}
+
+.pulse-marker {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #111;
+  border: 4px solid #FFD21F;
+  box-shadow: 0 0 0 0 rgba(255, 210, 31, 0.8);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  70% { box-shadow: 0 0 0 18px rgba(255, 210, 31, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 210, 31, 0); }
+}
+
+.fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+.leaflet-control-zoom a {
+  border-radius: 10px !important;
+}
+
+/* Soften the stock OpenStreetMap tiles so the UI stands out against them. */
+.leaflet-tile-pane {
+  filter: saturate(0.75) brightness(1.04) contrast(0.95);
+}

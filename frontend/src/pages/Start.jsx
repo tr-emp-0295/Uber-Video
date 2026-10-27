@@ -1,16 +1,43 @@
-
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Logo from '../components/Logo'
+
+const features = [
+  { icon: 'ri-motorbike-fill', label: 'Bike' },
+  { icon: 'ri-e-bike-2-fill', label: 'Auto' },
+  { icon: 'ri-taxi-fill', label: 'Cab' },
+]
 
 const Start = () => {
   return (
-    <div>
-      <div className='bg-cover bg-center bg-[url(https://images.unsplash.com/photo-1619059558110-c45be64b73ae?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)] h-screen pt-8 flex justify-between flex-col w-full'>
-        <img className='w-16 ml-8' src="https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoid2VhcmVcL2ZpbGVcLzhGbTh4cU5SZGZUVjUxYVh3bnEyLnN2ZyJ9:weare:F1cOF9Bps96cMy7r9Y2d7affBYsDeiDoIHfqZrbcxAw?width=1200&height=417" alt="" />
-        <div className='bg-white pb-8 py-4 px-4'>
-          <h2 className='text-[30px] font-semibold'>Get Started with Uber</h2>
-          <Link to='/login' className='flex items-center justify-center w-full bg-black text-white py-3 rounded-lg mt-5'>Continue</Link>
+    <div className='h-screen relative overflow-hidden flex flex-col justify-between bg-brand'>
+      <div className='absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/30'></div>
+      <div className='absolute top-1/3 -left-28 h-64 w-64 rounded-full bg-brand-dark/50'></div>
+
+      <div className='relative p-6 pt-8'>
+        <Logo />
+      </div>
+
+      <div className='relative flex-1 flex flex-col items-center justify-center px-6 text-center fade-up'>
+        <div className='flex gap-4'>
+          {features.map(item => (
+            <div key={item.label} className='flex flex-col items-center gap-2'>
+              <span className='h-20 w-20 rounded-3xl bg-ink text-brand flex items-center justify-center text-4xl shadow-xl rotate-[-4deg] odd:rotate-3'>
+                <i className={item.icon}></i>
+              </span>
+              <span className='text-sm font-bold text-ink'>{item.label}</span>
+            </div>
+          ))}
         </div>
+        <h1 className='mt-10 text-4xl lg:text-5xl font-extrabold leading-tight text-ink'>Go anywhere,<br />in minutes.</h1>
+        <p className='mt-3 text-ink/70 font-medium'>Fast, affordable rides with captains near you.</p>
+      </div>
+
+      <div className='relative bg-white rounded-t-3xl px-6 pt-6 pb-8 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] lg:w-[28rem] lg:self-center lg:rounded-3xl lg:mb-12 fade-up'>
+        <h2 className='text-2xl font-extrabold'>Get started</h2>
+        <p className='text-sm text-gray-500 mt-1'>Choose how you want to use RideGo.</p>
+        <Link to='/login' className='flex items-center justify-center gap-2 w-full bg-brand text-ink font-bold py-3.5 rounded-xl mt-4 shadow active:scale-[0.98] transition'><i className="ri-user-3-fill"></i> Continue as Rider</Link>
+        <Link to='/captain-login' className='flex items-center justify-center gap-2 w-full bg-ink text-white font-bold py-3.5 rounded-xl mt-3 active:scale-[0.98] transition'><i className="ri-steering-2-fill"></i> Continue as Captain</Link>
       </div>
     </div>
   )
